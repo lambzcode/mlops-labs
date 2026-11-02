@@ -1,0 +1,40 @@
+artifact_path: mlflow-artifacts:/1/models/m-277f818d7fe64809bcc9df057b5b6929/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict_proba
+    python_version: 3.12.9
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.1
+    skops_trusted_types:
+    - sklearn.ensemble._hist_gradient_boosting.predictor.TreePredictor
+is_signature_from_type_hint: false
+mlflow_version: 3.17.1
+model_id: m-277f818d7fe64809bcc9df057b5b6929
+model_size_bytes: 397782
+model_uuid: m-277f818d7fe64809bcc9df057b5b6929
+prompts: null
+run_id: b1f6f773371b4182b9acaec0ae2b6361
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "amount", "required": true}, {"type": "long",
+    "name": "hour", "required": true}, {"type": "double", "name": "distance_km", "required":
+    true}, {"type": "string", "name": "merchant", "required": true}, {"type": "long",
+    "name": "online", "required": true}, {"type": "long", "name": "tx_last_24h", "required":
+    true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1,
+    2]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-10-23 10:22:42.667680'

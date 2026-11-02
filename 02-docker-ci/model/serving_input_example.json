@@ -1,0 +1,38 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "amount",
+      "hour",
+      "distance_km",
+      "merchant",
+      "online",
+      "tx_last_24h"
+    ],
+    "data": [
+      [
+        16.58,
+        1,
+        7.8,
+        "restaurant",
+        0,
+        3
+      ],
+      [
+        147.93,
+        12,
+        1.8,
+        "travel",
+        1,
+        2
+      ],
+      [
+        17.87,
+        7,
+        5.4,
+        "gas",
+        1,
+        4
+      ]
+    ]
+  }
+}
