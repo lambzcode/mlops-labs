@@ -1,0 +1,9 @@
+# Lab: no Slack or PagerDuty. Alerts are visible at http://localhost:9093.
+# In production the receiver would carry slack_configs or pagerduty_configs.
+route:
+  receiver: lab
+  group_by: [alertname]
+  group_wait: 5s
+  repeat_interval: 1h
+receivers:
+  - name: lab

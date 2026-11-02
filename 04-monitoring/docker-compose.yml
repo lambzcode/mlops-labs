@@ -1,0 +1,23 @@
+# The monitoring stack. The API runs on your machine (uv run uvicorn app:app), the stack runs here.
+#   docker compose up -d
+#   Prometheus http://localhost:9090   Alertmanager http://localhost:9093   Grafana http://localhost:3000
+services:
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    volumes: ["./prometheus:/etc/prometheus:ro"]
+    ports: ["9090:9090"]
+    extra_hosts: ["host.docker.internal:host-gateway"]   # reach the API on your machine (Linux needs this)
+  alertmanager:
+    image: prom/alertmanager:v0.28.1
+    volumes: ["./alertmanager:/etc/alertmanager:ro"]
+    ports: ["9093:9093"]
+  grafana:
+    image: grafana/grafana:12.1.0
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"        # lab only: no login
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3000:3000"]
+    depends_on: [prometheus]

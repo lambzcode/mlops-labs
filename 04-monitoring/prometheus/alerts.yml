@@ -1,0 +1,30 @@
+groups:
+  - name: fraud-model
+    rules:
+      - alert: ApiDown                              # layer 1
+        expr: up{job="fraud-api"} == 0
+        for: 30s
+        labels: { severity: page }
+        annotations:
+          summary: "the fraud API does not answer /metrics"
+
+      - alert: SlowRequests                         # layer 1
+        expr: histogram_quantile(0.95, sum by (le) (rate(fraud_request_seconds_bucket[1m]))) > 0.2
+        for: 1m
+        labels: { severity: page }
+        annotations:
+          summary: "P95 latency {{ $value | printf \"%.2f\" }} s, the budget is 0.2 s"
+
+      - alert: InputDrift                           # layer 2
+        expr: fraud_input_psi{feature="amount"} > 99   # TODO 5: replace 99 by the PSI level at which you act (session 5)
+        for: 1m                                     # lab value; production uses 10m
+        labels: { severity: page }
+        annotations:
+          summary: "amount drifted (PSI {{ $value | printf \"%.2f\" }})"
+
+      - alert: FlaggedShareHigh                     # layer 3
+        expr: sum(rate(fraud_flagged_total[2m])) / sum(rate(fraud_predictions_total[2m])) > 0.02
+        for: 1m
+        labels: { severity: ticket }
+        annotations:
+          summary: "more than 2 percent of the predictions are flagged"

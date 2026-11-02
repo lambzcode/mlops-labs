@@ -1,0 +1,14 @@
+[project]
+name = "04-monitoring-lab"
+version = "0.1.0"
+description = "Session 4 lab: four-layer monitoring of the fraud API"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.0",
+    "httpx>=0.28.1",
+    "pandas>=3.1.0",
+    "prometheus-client>=0.26.0",
+    "scikit-learn>=1.9.1",
+    "structlog>=26.1.0",
+    "uvicorn[standard]>=0.54.0",
+]
