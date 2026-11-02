@@ -1,0 +1,26 @@
+[project]
+name = "03-serving"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "lambzcode", email = "lambert.fatoux@enpc.fr" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.0",
+    "joblib>=1.6.0",
+    "pandas>=3.1.0",
+    "scikit-learn>=1.9.1",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "locust>=2.47.0",
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+norecursedirs = ["solution", ".venv"]
